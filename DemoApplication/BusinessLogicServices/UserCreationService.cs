@@ -16,10 +16,8 @@ namespace Numero3.EntityFramework.Demo.BusinessLogicServices
 
 		public UserCreationService(IDbContextScopeFactory dbContextScopeFactory, IUserRepository userRepository)
 		{
-			if (dbContextScopeFactory == null) throw new ArgumentNullException("dbContextScopeFactory");
-			if (userRepository == null) throw new ArgumentNullException("userRepository");
-			_dbContextScopeFactory = dbContextScopeFactory;
-			_userRepository = userRepository;
+			_dbContextScopeFactory = dbContextScopeFactory ?? throw new ArgumentNullException("dbContextScopeFactory");
+			_userRepository = userRepository ?? throw new ArgumentNullException("userRepository");
 		}
 
 		public void CreateUser(UserCreationSpec userToCreate)
@@ -37,13 +35,13 @@ namespace Numero3.EntityFramework.Demo.BusinessLogicServices
 			{
 				//-- Build domain model
 				var user = new User()
-				           {
-							   Id = userToCreate.Id,
-							   Name = userToCreate.Name,
-							   Email = userToCreate.Email,
-							   WelcomeEmailSent = false,
-					           CreatedOn = DateTime.UtcNow
-				           };
+				{
+					Id = userToCreate.Id,
+					Name = userToCreate.Name,
+					Email = userToCreate.Email,
+					WelcomeEmailSent = false,
+					CreatedOn = DateTime.UtcNow
+				};
 
 				//-- Persist
 				_userRepository.Add(user);

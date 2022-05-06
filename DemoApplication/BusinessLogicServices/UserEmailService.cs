@@ -31,7 +31,7 @@ namespace Numero3.EntityFramework.Demo.BusinessLogicServices
 
 			// We're going to send a welcome email to the provided user
 			// (if one hasn't been sent already). Once sent, we'll update
- 			// that User entity in our DB to record that its Welcome email
+			// that User entity in our DB to record that its Welcome email
 			// has been sent.
 
 			// Emails can't be rolled-back. Once they're sent, they're sent. 
@@ -65,7 +65,7 @@ namespace Numero3.EntityFramework.Demo.BusinessLogicServices
 				// When you force the creation of a new DbContextScope, you must force the parent
 				// scope (if any) to reload the entities you've modified here. Otherwise, the method calling
 				// you might not be able to see the changes you made here.
-				dbContextScope.RefreshEntitiesInParentScope(new List<User> {user});
+				dbContextScope.RefreshEntitiesInParentScope(new List<User> { user });
 			}
 		}
 
